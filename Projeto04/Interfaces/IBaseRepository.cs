@@ -12,5 +12,6 @@ namespace Projeto04.Interfaces
         void Alterar(T obj);
         void Excluir(T obj);
         List<T> Consultar();
+        T ObterPorId(Guid id);
     }
 }

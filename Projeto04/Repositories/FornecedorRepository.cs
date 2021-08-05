@@ -38,22 +38,73 @@ namespace Projeto04.Repositories
 
         public void Alterar(Fornecedor obj)
         {
-            throw new NotImplementedException();
+            var query = @"
+                            UPDATE FORNECEDOR
+                            SET
+                                NOME = @Nome
+                                CNPJ = @Cnpj
+                            WHERE
+                                IDFORNECEDOR = @IdFornecedor
+                         ";
+
+            using (var connection = new SqlConnection(_connectionstring))
+            {
+                connection.Execute(query, obj);
+            }
         }
 
         public void Excluir(Fornecedor obj)
         {
-            throw new NotImplementedException();
+            var query = @"
+                            DELETE FROM FORNECEDOR
+                            WHERE IDFORNECEDOR = @IdFornecedor
+                        ";
+
+            using (var connection = new SqlConnection(_connectionstring))
+            {
+                connection.Execute(query, obj);
+            }
         }
 
         public List<Fornecedor> Consultar()
         {
-            throw new NotImplementedException();
+            var query = @"
+                            SELECT * FROM FORNECEDOR  
+                            ORDER BY NOME
+                         ";
+
+            using (var connection = new SqlConnection(_connectionstring))
+            {
+                return connection
+                    .Query<Fornecedor>(query) //Usado para consulta
+                    .ToList();//retorna lista(varios valores)
+            }
         }
 
         public Fornecedor ConsultarPorCnpj(string cnpj)
         {
-            throw new NotImplementedException();
+            var query = @"
+                            SELECT * FROM FORNECEDOR
+                            WHERE CNPJ = @cnpj
+                         ";
+
+            using (var connection = new SqlConnection(_connectionstring))
+            {
+                return connection.Query<Fornecedor>(query, new { cnpj }).FirstOrDefault();
+            }
+        }
+
+        public Fornecedor ObterPorId(Guid id)
+        {
+            var query = @"
+                            SELECT * FROM FORNECEDOR
+                            WHERE IDFORNECEDOR = @id
+                         ";
+
+            using (var connection = new SqlConnection(_connectionstring))
+            {
+                return connection.Query<Fornecedor>(query, new { id }).FirstOrDefault();
+            }
         }
     }
 }

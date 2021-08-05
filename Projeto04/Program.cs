@@ -14,17 +14,6 @@ namespace Projeto04
             {
                 var connectionstring = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=BDProjeto04;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
-                Console.WriteLine("\nCADASTRO DE FORNECEDOR\n");
-
-                var fornecedor = new Fornecedor();
-                fornecedor.IdFornecedor = Guid.NewGuid();
-
-                Console.Write("Nome do fornecedor..........: ");
-                fornecedor.Nome = Console.ReadLine();
-
-                Console.Write("CNPJ do fornecedor..........: ");
-                fornecedor.Cnpj = Console.ReadLine();
-
                 var fornecedorRepository = new FornecedorRepository(connectionstring);
                 fornecedorRepository.Inserir(fornecedor);
 
